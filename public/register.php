@@ -1,73 +1,34 @@
-<?php
-session_start();
-require_once('../config/conexao.php');
+<?php require_once('../src/functions/register.php'); ?>
 
-$erro = '';
-
-// Verifica se o formulário foi enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = trim($_POST['name']);
-    $email = trim($_POST['email']);
-    $senha = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-    // Verifica se já existe esse e-mail
-    $verifica = $conn->prepare("SELECT id FROM users WHERE email = ?");
-    $verifica->bind_param("s", $email);
-    $verifica->execute();
-    $verifica->store_result();
-
-    // Se e-mail já existir, mostra erro
-    if ($verifica->num_rows > 0) {
-        $erro = "E-mail já cadastrado.";
-    // Senão, insere o usuário no banco
-    } else {
-        $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nome, $email, $senha);
-
-        // Se cadastrar com sucesso, redireciona para o login
-        if ($stmt->execute()) {
-            header("Location: login.php");
-            exit();
-        } else {
-            $erro = "Erro ao cadastrar usuário.";
-        }
-    }
-}
-?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cadastro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/index.css">
-  <link rel="stylesheet" href="../assets/css/login.css">
-</head>
+<?php include('../templates/head.php'); ?>
 
 <body>
     <div class="login-container">
         <form class="login-form" method="POST" action="register.php">
-            <h2>Criar Conta</h2>
-
-            <?php if ($erro): ?>
-                <div class="error-message"><?= $erro ?></div>
-            <?php endif; ?>
+            <h2>Registra-se</h2>
 
             <div class="input-group">
                 <label for="name">Nome</label>
-                <input type="text" name="name" id="name" required>
+                <input type="text" name="name" id="name" value="<?= htmlspecialchars($nome) ?>" required>
+                <?php if (!empty($erros['name'])): ?>
+                    <p class="error-message"><?= $erros['name'] ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="input-group">
                 <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email" value="<?= htmlspecialchars($email) ?>" required>
+                <?php if (!empty($erros['email'])): ?>
+                    <p class="error-message"><?= $erros['email'] ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="input-group">
                 <label for="password">Senha</label>
                 <input type="password" name="password" id="password" required>
+                <?php if (!empty($erros['password'])): ?>
+                    <p class="error-message"><?= $erros['password'] ?></p>
+                <?php endif; ?>
             </div>
 
             <button type="submit">Cadastrar</button>

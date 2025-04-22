@@ -16,9 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($resultado->num_rows === 1) {
         $usuario = $resultado->fetch_assoc();
 
-        // Verifica a senha
         if (password_verify($senha, $usuario['password'])) {
-            // Login válido, salva dados na sessão
             $_SESSION['user_id'] = $usuario['id'];
             $_SESSION['user_name'] = $usuario['name'];
 
@@ -33,31 +31,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Login</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/index.css">
-  <link rel="stylesheet" href="../assets/css/login.css">
-</head>
+<?php include('../templates/head.php'); ?>
 
 <body>
     <div class="login-container">
         <form class="login-form" method="POST" action="login.php">
-            <h2>To Do List</h2>
-
-            <?php if ($erro): ?>
-                <div class="error-message"><?= $erro ?></div>
-            <?php endif; ?>
+            <h2>Entrar</h2>
             
             <div class="input-group">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" required>
+                <?php if ($erro): ?>
+                    <div class="error-message"><?= $erro ?></div>
+                <?php endif; ?>
             </div>
 
             <div class="input-group">

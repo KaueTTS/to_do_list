@@ -75,12 +75,17 @@ button:hover {
 
 /* Error message styling */
 .error-message {
-    background-color: #ffe6e6;
-    color: #d8000c;
-    padding: 0.75rem 1rem;
-    border: 1px solid #d8000c;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    font-size: 0.95rem;
-  }
+    color: #d93025;
+    background-color: #fce8e6;
+    padding: 0.5rem 0.75rem;
+    border-left: 4px solid #d93025;
+    margin-top: 0.25rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
