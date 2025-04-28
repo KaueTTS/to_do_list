@@ -5,7 +5,7 @@
     <div class="logo">Agenda</div>
     <div class="menu">
         <a href="tasks.php">📋 <span>Tarefas</span></a>
-        <a href="login.php">🚪 <span>Sair</span></a>
+        <a href="../src/functions/logout.php" id="logout">🚪 <span>Sair</span></a>
     </div>
     <div class="user">👤 <?= htmlspecialchars($user_name) ?></div>
 </div>

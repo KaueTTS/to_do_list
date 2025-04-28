@@ -1,35 +1,4 @@
-<?php
-session_start();
-require_once('../config/conexao.php');
-
-$erro = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email']);
-    $senha = $_POST['password'];
-
-    $stmt = $conn->prepare("SELECT id, name, password FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-
-    if ($resultado->num_rows === 1) {
-        $usuario = $resultado->fetch_assoc();
-
-        if (password_verify($senha, $usuario['password'])) {
-            $_SESSION['user_id'] = $usuario['id'];
-            $_SESSION['user_name'] = $usuario['name'];
-
-            header("Location: tasks.php");
-            exit();
-        } else {
-            $erro = "Senha incorreta.";
-        }
-    } else {
-        $erro = "Usuário não encontrado.";
-    }
-}
-?>
+<?php require_once('../src/functions/login.php'); ?>
 
 <?php include('../templates/head.php'); ?>
 
@@ -41,14 +10,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="input-group">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" required>
-                <?php if ($erro): ?>
-                    <div class="error-message"><?= $erro ?></div>
+
+                <?php if (!empty($erros['email'])): ?>
+                    <p class="error-message"><?= $erros['email'] ?></p>
                 <?php endif; ?>
             </div>
 
             <div class="input-group">
                 <label for="senha">Senha</label>
                 <input type="password" name="password" id="password" required>
+
+                <?php if (!empty($erros['password'])): ?>
+                    <p class="error-message"><?= $erros['password'] ?></p>
+                <?php endif; ?>
             </div>
 
             <button type="submit">Entrar</button>

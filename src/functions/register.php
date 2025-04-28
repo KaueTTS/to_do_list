@@ -19,8 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erros['email'] = "Formato de e-mail inválido.";
     }
 
-    if (strlen($senha) < 6) {
-        $erros['password'] = "A senha deve ter pelo menos 6 caracteres.";
+    if (strlen($senha) < 8 ) {
+        $erros['password'] = "A senha deve ter pelo menos 8 caracteres.";
+    } elseif (!preg_match('/[A-Z]/', $senha)) {
+        $erros['password'] = "A senha deve conter pelo menos uma letra maiúscula.";
+    } elseif (!preg_match('/[a-z]/', $senha)) {
+        $erros['password'] = "A senha deve conter pelo menos uma letra minúscula.";
     }
 
     if (empty($erros)) {
