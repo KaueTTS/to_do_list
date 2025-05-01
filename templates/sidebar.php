@@ -2,7 +2,7 @@
 
 <div class="sidebar">
     <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-    <div class="logo">Agenda</div>
+    <div class="logo">Welcome</div>
     <div class="menu">
         <a href="tasks.php">📋 <span>Tarefas</span></a>
         <a href="../src/functions/logout.php" id="logout">🚪 <span>Sair</span></a>

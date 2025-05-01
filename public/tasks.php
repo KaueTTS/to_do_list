@@ -153,7 +153,7 @@ $stmt->close();
         </div>
     </div>
 
-    <script src="../assets/js/tasks.js"></script>
+    <script src="../assets/scripts/tasks.js"></script>
 
 </body>
 </html>
