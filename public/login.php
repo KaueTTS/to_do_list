@@ -1,4 +1,4 @@
-<?php require_once('../src/functions/login.php'); ?>
+<?php require_once('../functions/login.php'); ?>
 
 <?php include('../templates/head.php'); ?>
 
