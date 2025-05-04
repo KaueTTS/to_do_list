@@ -21,8 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $stmt->execute();
         $stmt->close();
     }
-    header('Location: tasks.php');
-    exit;
 }
 
 // Marcar como feita
@@ -32,8 +30,6 @@ if (isset($_GET['done'])) {
     $stmt->bind_param("ii", $id, $user_id);
     $stmt->execute();
     $stmt->close();
-    header('Location: tasks.php');
-    exit;
 }
 
 // Excluir tarefa
@@ -43,8 +39,6 @@ if (isset($_GET['delete'])) {
     $stmt->bind_param("ii", $id, $user_id);
     $stmt->execute();
     $stmt->close();
-    header('Location: tasks.php');
-    exit;
 }
 
 // Editar tarefa
@@ -56,8 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $stmt->bind_param("ssii", $title, $description, $id, $user_id);
     $stmt->execute();
     $stmt->close();
-    header('Location: tasks.php');
-    exit;
 }
 
 // Buscar tarefas
@@ -77,8 +69,6 @@ $result = $stmt->get_result();
 $tarefas = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 ?>
-
-<!-- <?php include('../templates/head.php'); ?> -->
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -133,8 +123,6 @@ $stmt->close();
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-
-            <?php include('../templates/footer.php'); ?>
         </div>
     </div>
 
@@ -154,6 +142,5 @@ $stmt->close();
     </div>
 
     <script src="../assets/scripts/tasks.js"></script>
-
 </body>
 </html>

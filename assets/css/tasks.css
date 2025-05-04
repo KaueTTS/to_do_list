@@ -31,11 +31,11 @@ body {
 /* Painel de tarefas limitado */
 .todo-panel {
   background: white;
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 10px;
   width: 100%;
-  max-width: 600px;
-  height: 80vh; /* altura fixa */
+  max-width: 700px;
+  height: 82vh; /* altura fixa */
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -43,7 +43,7 @@ body {
 
 /* Título */
 .welcome {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 20px;
   color: #2c3e50;
   text-align: center;
@@ -55,7 +55,7 @@ body {
 .edit-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 20px;
 }
 
@@ -90,14 +90,36 @@ body {
   background-color: #1a252f;
 }
 
+.edit-form button[type="button"] {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+}
+
+.edit-form button[type="button"]:hover {
+  background-color: #a6b0b7;
+}
+
 /* Área rolável para tarefas */
 .task-list {
   flex: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   padding-right: 5px; /* espaço para não cortar scrollbar */
+}
+
+.task-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.task-list::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* Card de tarefa */
@@ -105,7 +127,7 @@ body {
   background: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
@@ -134,6 +156,8 @@ body {
   text-decoration: none;
   color: white;
   display: inline-block;
+  cursor: pointer;
+  border: none;
   transition: background 0.3s ease;
 }
 
@@ -212,9 +236,14 @@ body {
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.2rem;
-  color: #888;
-  pointer-events: none; /* não interfere no clique */
+  font-size: 1.1rem;
+  color: #aaa;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.search-container input:focus + .search-icon {
+  color: #2c3e50;
 }
 
 .divisor {

@@ -8,6 +8,6 @@ session_unset();
 session_destroy();
 
 // Redireciona para a página de login
-header('Location: ../../public/login.php');
+header('Location: ../public/login.php');
 exit();
 ?>
